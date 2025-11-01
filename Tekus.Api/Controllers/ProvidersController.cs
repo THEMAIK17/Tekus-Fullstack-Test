@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tekus.Application.Interfaces;
+using Tekus.Domain.Dtos;
 using Tekus.Domain.Entities;
 
 namespace Tekus.API.Controllers
@@ -16,11 +17,12 @@ namespace Tekus.API.Controllers
             _providerService = providerService;
         }
 
-        // GET: api/Providers
+        // GET: api/Providers?pageNumber=1&pageSize=10&sortBy=Name&name=Tekus
         [HttpGet]
-        public async Task<IActionResult> GetAllProviders()
+        public async Task<IActionResult> GetAllProviders([FromQuery] ProviderQueryParameters queryParameters)
         {
-            var providers = await _providerService.GetAllProvidersAsync();
+            // Pass the query parameters to the service
+            var providers = await _providerService.GetAllProvidersAsync(queryParameters);
             return Ok(providers);
         }
 
