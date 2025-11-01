@@ -1,4 +1,5 @@
-﻿using Tekus.Domain.Entities;
+﻿using Tekus.Domain.Dtos;
+using Tekus.Domain.Entities;
 
 namespace Tekus.Domain.Interfaces;
 
@@ -6,7 +7,9 @@ public interface IProviderRepository
 {
     // Reads
     Task<Provider?> GetByIdAsync(int id);
-    Task<IEnumerable<Provider>> GetAllAsync();
+    
+    // Now accepts query parameters to handle paging, sorting, and filtering.
+    Task<IEnumerable<Provider>> GetAllAsync(ProviderQueryParameters queryParameters);
         
     // Writes (tracks changes, does not save)
     void Add(Provider provider); 

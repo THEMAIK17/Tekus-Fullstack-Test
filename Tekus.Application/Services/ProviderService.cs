@@ -1,4 +1,5 @@
 ﻿using Tekus.Application.Interfaces;
+using Tekus.Domain.Dtos;
 using Tekus.Domain.Entities;
 using Tekus.Domain.Interfaces;
 
@@ -22,9 +23,11 @@ namespace Tekus.Application.Services
             return await _providerRepository.GetByIdAsync(id);
         }
 
-        public async Task<IEnumerable<Provider>> GetAllProvidersAsync()
+        // This method now accepts the query parameters and passes them
+        // directly to the repository.
+        public async Task<IEnumerable<Provider>> GetAllProvidersAsync(ProviderQueryParameters queryParameters)
         {
-            return await _providerRepository.GetAllAsync();
+            return await _providerRepository.GetAllAsync(queryParameters);
         }
         
         // --- Business Logic Validations ---
