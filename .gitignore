@@ -1,5 +1,4 @@
 # --- JetBrains Rider ---
-*.user
 *.sln.DotSettings
 *.suo
 .idea/
