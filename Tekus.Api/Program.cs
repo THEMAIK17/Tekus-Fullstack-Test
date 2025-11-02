@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Tekus.Api.Middleware;
 using Tekus.Application.Interfaces;
 using Tekus.Application.Services;
 using Tekus.Domain.Interfaces;
@@ -51,6 +52,7 @@ builder.Services.AddSwaggerGen();
 // Configure The Middleware ---
 var app = builder.Build();
 
+
 // Show Swagger UI only in development
 if (app.Environment.IsDevelopment())
 {
@@ -62,6 +64,9 @@ app.UseHttpsRedirection();
 
 // Use the CORS policy I defined
 app.UseCors("AllowReactApp");
+
+//Apply API Key verification to all requests
+app.UseMiddleware<ApiKeyMiddleware>();
 
 app.UseAuthorization();
 
